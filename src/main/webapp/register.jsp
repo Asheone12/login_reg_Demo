@@ -11,31 +11,33 @@
     <title>用户注册</title>
 </head>
 <body>
+<div style="text-align: center">
 <form action="register" method="post" >
   <input type="hidden" name="action" value="regist">
   <div class="input-wrapper">
     <div class="border-wrapper">
-      用户名：<input type="text" name="userName" placeholder="userName" class="border-item">
+      用户名：<input type="text" name="userName"  class="border-item">
     </div>
     <div class="border-wrapper">
-      密码：<input type="text" name="userPwd" placeholder="userPwd" class="border-item">
+      密码：<input type="text" name="userPwd"  class="border-item">
     </div>
     <div class="border-wrapper">
-      确认密码：<input type="text" name="userPwd2" placeholder="userPwd2" class="border-item">
+      确认密码：<input type="text" name="userPwd2"  class="border-item">
     </div>
     <div class="border-wrapper">
-      邮箱：<input type="text" name="userEmail" placeholder="userEmail" class="border-item">
+      邮箱：<input type="text" name="userEmail"  class="border-item">
     </div>
     <div class="border-wrapper">
-      单位：<input type="text" name="userAddress" placeholder="userAddress" class="border-item">
+      单位：<input type="text" name="userAddress"  class="border-item">
     </div>
     <div class="border-wrapper">
       <span id="msg" style="font-size: 12px;color: red">${messageModel.msg}</span><br>
     </div>
     <div class="action">
-      <input type="submit" class="btn" value="Regist">
+      <input type="submit" class="btn" value="注册">
     </div>
   </div>
 </form>
+</div>
 </body>
 </html>

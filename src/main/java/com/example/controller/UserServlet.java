@@ -34,7 +34,7 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // 1.接收客户端的请求（接收参数；姓名，密码）
-        String username = new String(req.getParameter("userName").getBytes("ISO-8859-1"),"utf-8");
+        String username = req.getParameter("userName");
         String password = req.getParameter("userPwd");
         // 2.调用service层的方法，返回消息模型对象
         MessageModel messageModel = userService.userLogin(username, password);

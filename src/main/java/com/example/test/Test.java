@@ -10,14 +10,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Test {
-    /**public static void main(String[] args){
+    public static void main(String[] args){
         SqlSession session = GetSqlSession.createSqlSession();
         UserMapper userMapper=session.getMapper(UserMapper.class);
-        User user= userMapper.queryUserByName("zhangsan2");
+        User user= userMapper.queryUserByEmail("12345@qq.com");
         System.out.println(user);
-    }*/
+    }
 
-    public static void main(String[] args){
+    /**public static void main(String[] args){
         SqlSession session = GetSqlSession.createSqlSession();
         UserMapper userMapper=session.getMapper(UserMapper.class);
         User user= new User();
@@ -30,5 +30,5 @@ public class Test {
         String registTime = df.format(date);//将当前时间转换成特定格式的时间字符串，这样便可以插入到数据库中
         user.setRegistTime(registTime);
         userMapper.insertUser(user);
-    }
+    }*/
 }

@@ -4,6 +4,9 @@
     <select id="queryUserByName" parameterType="String" resultType="com.example.entity.User">
         select  * from  user where userName=#{userName}
     </select>
+    <select id="queryUserByEmail" parameterType="String" resultType="com.example.entity.User">
+        select  * from  user where userEmail=#{userEmail}
+    </select>
     <insert id="insertUser" parameterType="com.example.entity.User" useGeneratedKeys="true" keyProperty="userId">
         insert into user(userName,userPwd,userEmail,userAddress,registTime)
         values(#{userName},#{userPwd},#{userEmail},#{userAddress},#{registTime})

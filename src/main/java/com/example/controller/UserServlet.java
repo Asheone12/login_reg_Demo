@@ -46,7 +46,6 @@ public class UserServlet extends HttpServlet {
 //            System.out.println("登录失败");
             //将消息模型对象设置到request作用域中，请求转发跳转到login.jsp
             req.setAttribute("messageModel", messageModel);
-//            resp.sendRedirect("index.jsp");
             req.getRequestDispatcher("login.jsp").forward(req, resp);
         }
     }

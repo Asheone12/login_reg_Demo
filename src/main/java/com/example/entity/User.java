@@ -6,6 +6,7 @@ public class User {
     private String userPwd;//密码
     private String userEmail;//邮箱
     private String userAddress;//地址
+    private String registTime;
 
     public Integer getUserID() {
         return userID;
@@ -45,5 +46,13 @@ public class User {
 
     public void setUserAddress(String userAddress) {
         this.userAddress = userAddress;
+    }
+
+    public String getRegistTime() {
+        return registTime;
+    }
+
+    public void setRegistTime(String registTime) {
+        this.registTime = registTime;
     }
 }

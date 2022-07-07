@@ -1,4 +1,5 @@
 package com.example.entity;
+
 //User实体类
 public class User {
     private Integer userID;//用户编号
@@ -6,7 +7,10 @@ public class User {
     private String userPwd;//密码
     private String userEmail;//邮箱
     private String userAddress;//地址
-    private String registTime;
+    private String registTime;//注册时间
+    private String trueName;//z真实姓名
+    private String phoneNumber;//电话
+    private String birthday;//生日
 
     public Integer getUserID() {
         return userID;
@@ -54,5 +58,29 @@ public class User {
 
     public void setRegistTime(String registTime) {
         this.registTime = registTime;
+    }
+
+    public String getTrueName() {
+        return trueName;
+    }
+
+    public void setTrueName(String trueName) {
+        this.trueName = trueName;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 }

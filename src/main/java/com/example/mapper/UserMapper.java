@@ -6,4 +6,6 @@ public interface UserMapper {
     public User queryUserByName(String userName);
     public User queryUserByEmail(String userEmail);
     public void insertUser(User user);
+    public void updateUser(User user);
+    public void addMsgUser(User user);
 }

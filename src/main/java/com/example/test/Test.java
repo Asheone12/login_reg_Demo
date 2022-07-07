@@ -11,11 +11,11 @@ import java.util.Date;
 
 public class Test {
     public static void main(String[] args){
-        SqlSession session = GetSqlSession.createSqlSession();
+       /** SqlSession session = GetSqlSession.createSqlSession();
         UserMapper userMapper=session.getMapper(UserMapper.class);
         User user= userMapper.queryUserByEmail("12345@qq.com");
         System.out.println(user);
-    }
+    }*/
 
     /**public static void main(String[] args){
         SqlSession session = GetSqlSession.createSqlSession();
@@ -31,4 +31,14 @@ public class Test {
         user.setRegistTime(registTime);
         userMapper.insertUser(user);
     }*/
+        SqlSession session = GetSqlSession.createSqlSession();
+        UserMapper userMapper=session.getMapper(UserMapper.class);
+        User user=new User();
+        user.setUserID(1);
+        user.setBirthday("1977-11-11");
+        user.setPhoneNumber("15855854100");
+        user.setTrueName("李狗蛋");
+        userMapper.addMsgUser(user);
+
+    }
 }

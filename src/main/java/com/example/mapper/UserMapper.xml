@@ -11,4 +11,12 @@
         insert into user(userName,userPwd,userEmail,userAddress,registTime)
         values(#{userName},#{userPwd},#{userEmail},#{userAddress},#{registTime})
     </insert>
+    <update id="updateUser" parameterType="com.example.entity.User">
+        update user set userPwd=#{userPwd},userEmail=#{userEmail}
+        where userName=#{userName}
+    </update>
+    <update id="addMsgUser" parameterType="com.example.entity.User">
+        update user set trueName=#{trueName},phoneNumber=#{phoneNumber},birthday=#{birthday}
+        where userName=#{userName}
+    </update>
 </mapper>

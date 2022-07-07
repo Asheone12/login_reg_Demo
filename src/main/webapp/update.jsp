@@ -10,8 +10,34 @@
 <head>
     <title>修改用户注册信息</title>
 </head>
+<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
+<script type="text/javascript">
+    function gettime(){
+        var d = new Date().Format("yyyy-MM-dd HH:mm");
+        var str = "软件测试综合实验-计算机1901-10-" + d;
+        document.getElementById("t").innerHTML =str;
+        window.setTimeout("gettime()",1000);
+    }
+    Date.prototype.Format = function (fmt) {
+        var o = {
+            "M+": this.getMonth() + 1, //月份
+            "d+": this.getDate(), //日
+            "H+": this.getHours(), //小时
+            "m+": this.getMinutes(), //分
+            "s+": this.getSeconds(), //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds() //毫秒
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    }
+    window.onload = gettime;
+</script>
 <body>
 <div class="content" style="width:100%;text-align:center">
+    <div id="t"></div>
     <form action="updateMsg" id="updateForm" method="post">
         <table style="margin: auto">
             <div class="line"></div>
@@ -57,12 +83,11 @@
         </table>
     </form>
 </div>
-<script type="text/javascript" src="js/jquery-3.4.1.js"></script>
 <script type="text/javascript">
     var flag1 = 0;
     var flag2 = 0;
     var flag3 = 0;
-    var flag4= 0 ;
+    var flag4 = 0;
     var msgbox = "旧密码不能为空！";
     //1.
     $('#userPwd0').change(function () {
@@ -78,72 +103,67 @@
         }
     });
     //2.
-    $('#userPwd').change(function () {
-        if (flag1) {
-            var password = $('#userPwd').val();
-            var reg = /^.*(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*?])/; //验证格式，至少各含有1个数字、1个大写字母、1个小写字母和其它字符
-            if (isEmpty(password)) {
-                $('#passspan').html("密码不能为空!");
-                msgbox = '密码不能为空!';
-                return;
-            } else if (password.length < 7 || password.length > 11) {
-                $('#passspan').html("密码长度必须大于等于6，小于12！");
-                msgbox = '密码格式错误，密码长度必须大于等于6，小于12！';
-                return;
-            } else if (!(reg.test(password))) {
-                $('#passspan').html("必须至少有1个数字、1个大写字母、1个小写字母和其它字符共同组成!");
-                msgbox = '密码格式错误，必须至少有1个数字、1个大写字母、1个小写字母和其它字符共同组成!';
-                return;
-            } else {
-                flag2 = 1;
-                //格式正确，红色提示信息变为空
-                $('#passspan').html("");
-            }
+    $('#userPwd').bind('focus input propertychange', function () {
+        var password = $('#userPwd').val();
+        var reg = /^.*(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*?])/; //验证格式，至少各含有1个数字、1个大写字母、1个小写字母和其它字符
+        if (isEmpty(password)) {
+            $('#passspan').html("密码不能为空!");
+            msgbox = '密码不能为空!';
+            return;
+        } else if (password.length < 7 || password.length > 11) {
+            $('#passspan').html("密码长度必须大于等于6，小于12！");
+            msgbox = '密码格式错误，密码长度必须大于等于6，小于12！';
+            return;
+        } else if (!(reg.test(password))) {
+            $('#passspan').html("必须至少有1个数字、1个大写字母、1个小写字母和其它字符共同组成!");
+            msgbox = '密码格式错误，必须至少有1个数字、1个大写字母、1个小写字母和其它字符共同组成!';
+            return;
+        } else {
+            flag2 = 1;
+            //格式正确，红色提示信息变为空
+            $('#passspan').html("");
         }
     });
     //3.
-    $('#userPwd2').blur(function () {
-        if (flag2) {
-            var password = $('#userPwd').val();
-            var againpw = $('#userPwd2').val();
-            if (password != againpw) {//比较密码是否一致
-                $('#againspan').html("两次输入的密码不一致！");
-                msgbox = '两次输入的密码不一致！';
-                return;
-            } else {
-                flag3 = 1;
-                //格式正确，红色提示信息变为空
-                $('#againspan').html("");
-            }
+    $('#userPwd2').bind('focus input propertychange', function () {
+        var password = $('#userPwd').val();
+        var againpw = $('#userPwd2').val();
+        if (password != againpw) {//比较密码是否一致
+            $('#againspan').html("两次输入的密码不一致！");
+            msgbox = '两次输入的密码不一致！';
+            return;
+        } else {
+            flag3 = 1;
+            //格式正确，红色提示信息变为空
+            $('#againspan').html("");
         }
     });
 
-    $('#userEmail').change(function () {
-        if (flag3) {
-            var email = $('#userEmail').val();
-            var reg = /^([A-Za-z0-9_\-\.\u4e00-\u9fa5])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,8})$/;//邮箱的格式
-            if (isEmpty(email)) {
-                $('#emailspan').html("邮箱不能为空!");
-                msgbox = '邮箱不能为空!';
-                return;
-            } else if (!(reg.test(email))) {//验证格式
-                $('#emailspan').html("请输入正确的邮箱!");
-                msgbox = '邮箱格式错误，请输入正确的邮箱!';
-                return;
-            } else {
-                flag4 = 1;
-                $('#emailspan').html("");
-            }
+    $('#userEmail').bind('focus input propertychange', function () {
+        var email = $('#userEmail').val();
+        var reg = /^([A-Za-z0-9_\-\.\u4e00-\u9fa5])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,8})$/;//邮箱的格式
+        if (isEmpty(email)) {
+            $('#emailspan').html("邮箱不能为空!");
+            msgbox = '邮箱不能为空!';
+            return;
+        } else if (!(reg.test(email))) {//验证格式
+            $('#emailspan').html("请输入正确的邮箱!");
+            msgbox = '邮箱格式错误，请输入正确的邮箱!';
+            return;
+        } else {
+            flag4 = 1;
+            $('#emailspan').html("");
         }
     });
     $('#update').click(function () {
-        if (flag4) {
+        if (flag1 & flag2 & flag3 & flag4) {
             $('#updateForm').submit();
         } else {
             alert(msgbox);
         }
 
     });
+
     function isEmpty(str) {
         if (str == null || str.trim() == "")
             return true;

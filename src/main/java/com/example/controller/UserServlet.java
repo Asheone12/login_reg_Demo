@@ -41,12 +41,11 @@ public class UserServlet extends HttpServlet {
         // 3.判断消息模的状态码
         if (messageModel.getCode() == 1) {//成功
             req.getSession().setAttribute("user", messageModel.getObject());
-            resp.sendRedirect("index.jsp");
+            resp.sendRedirect("loginSuccess.jsp");
         } else {  //失败
-//            System.out.println("登录失败");
-            //将消息模型对象设置到request作用域中，请求转发跳转到login.jsp
-            req.setAttribute("messageModel", messageModel);
-            req.getRequestDispatcher("login.jsp").forward(req, resp);
+            //将消息模型对象设置到session作用域中，跳转到loginFaild.jsp
+            req.getSession().setAttribute("failedMsg", messageModel.getMsg());
+            resp.sendRedirect("loginFailed.jsp");
         }
     }
 }

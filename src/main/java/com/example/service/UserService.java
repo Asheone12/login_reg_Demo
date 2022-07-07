@@ -27,14 +27,14 @@ public class UserService {
         if (u == null) {
             //将状态码、提示信息、回显数据设置到消息模型对象中，返回消息模型对象
             messageModel.setCode(0);
-            messageModel.setMsg("用户不存在");
+            messageModel.setMsg("用户名或密码错误");//用户不存在
             return messageModel;
         }
         //3.判断数据库中查询到的用户密码与前台传递过来的密码作比较,如果不相等，将状态码、提示信息、回显数据设置到消息模型对象中，返回消息模型对象
         if (!password.equals(u.getUserPwd())) {
             //密码不正确
             messageModel.setCode(0);
-            messageModel.setMsg("用户密码不正确");
+            messageModel.setMsg("登录密码错误");
             return messageModel;
         }
         //4.将成功状态、提示信息、用户对象设置到消息模型对象，并return
@@ -42,19 +42,17 @@ public class UserService {
         return messageModel;
     }
 
-    public MessageModel userRegist(String username, String userpwd,String userpwd2, String useremail, String useraddress) {
+    public MessageModel userRegist(String username, String userpwd, String useremail, String useraddress) {
         MessageModel messageModel = new MessageModel();
         User user = new User();
         user.setUserName(username);
         user.setUserPwd(userpwd);
-        user.setUserEmail(useremail);
         user.setUserAddress(useraddress);
+        user.setUserEmail(useremail);
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//注意月和小时的格式为两个大写字母
         java.util.Date date = new Date();//获得当前时间
         String registTime = df.format(date);//将当前时间转换成特定格式的时间字符串，这样便可以插入到数据库中
         user.setRegistTime(registTime);
-        //将用户信息存入消息模型中
-        messageModel.setObject(user);
         //1.调用Dao（mapper）层的查询方法，通过用户名查询用户对象,以及通过邮箱查询用户对象
         SqlSession session = GetSqlSession.createSqlSession();
         UserMapper userMapper = session.getMapper(UserMapper.class);
@@ -66,16 +64,20 @@ public class UserService {
             //将状态码、提示信息、回显数据设置到消息模型对象中，返回消息模型对象
             messageModel.setCode(0);
             messageModel.setMsg("该用户已存在！");
+            user.setUserName("");
+            messageModel.setObject(user);
             return messageModel;
         }
+        user.setUserName(username);
         //判断邮箱是否已被使用
         if (ue != null) {
             //将状态码、提示信息、回显数据设置到消息模型对象中，返回消息模型对象
             messageModel.setCode(0);
             messageModel.setMsg("该邮箱已被使用！");
+            user.setUserEmail("");
+            messageModel.setObject(user);
             return messageModel;
         }
-
         //3.将成功状态、提示信息、用户对象设置到消息模型对象，并return
         messageModel.setObject(user);
         //成功后，插入数据到数据库

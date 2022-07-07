@@ -1,8 +1,14 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: Dell
+  Date: 2022/7/7
+  Time: 22:35
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>首页</title>
+    <title>注册失败页面</title>
 </head>
 <script type="text/javascript" src="js/jquery-3.4.1.js"></script>
 <script type="text/javascript">
@@ -32,17 +38,8 @@
 <body>
 <div class="content" style="width:100%;text-align:center">
     <div id="t"></div>
-<div class="line"></div><font size="5">登录成功！</font><div class="line"></div>
-<h1>欢迎${user.userName}！以下为您的注册信息</h1>
-<h2>密码：${user.userPwd}</h2>
-<h2>邮箱：${user.userEmail}</h2>
-<h2>单位：${user.userAddress}</h2>
-<h2>注册时间：${user.registTime}</h2>
-<h2>真实姓名：${user.trueName}</h2>
-<h2>电话号码：${user.phoneNumber}</h2>
-<h2>生日：${user.birthday}</h2>
-<a href="addition.jsp">填写补充信息</a>
-<a href="logout">退出登录</a>
+    <h2>注册失败！ ${failedMsg}</h2>
+    <h2><a href="register.jsp" style="color:#458fce">重新填写</a></h2>
 </div>
 </body>
 </html>

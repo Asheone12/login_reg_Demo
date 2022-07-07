@@ -5,7 +5,7 @@
     <title>首页</title>
 </head>
 <body>
-<h1>登录成功！</h1>
+<div class="line"></div><font size="5">登录成功！</font><div class="line"></div>
 <h2>欢迎${user.userName}！以下为您的注册信息</h2>
 <h2>密码：${user.userPwd}</h2>
 <h2>邮箱：${user.userEmail}</h2>

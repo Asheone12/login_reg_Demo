@@ -61,18 +61,22 @@
   var flag3 = 0;
   var flag4 = 0;
   var flag5 = 1;
+  var msgbox="用户名不能为空！";
   //1.
-  $('#userName').blur(function (){
+  $('#userName').change(function (){
     var name=$('#userName').val();
-    var reg=/^\w{6,10}$/; //验证格式，3-10位字母、数字或下划线
+    var reg=/^\w{6,10}$/; //验证格式，6-10位字母、数字或下划线
     if(isEmpty(name)){
       $('#namespan').html("用户名不能为空！");
+      msgbox='用户名不能为空！';
       return ;
     }else if(name.length<6||name.length>10){
       $('#namespan').html("格式错误，长度为6-10个字符！");
+        msgbox='格式错误，长度为6-10个字符！';
       return ;
     }else if(!(reg.test(name))){
       $('#namespan').html("格式错误，只能是字母、数字或下划线！");
+        msgbox='格式错误，只能是字母、数字或下划线！';
       return ;
     }else{
       flag1 = 1;
@@ -81,18 +85,21 @@
     }
   });
   //2.
-  $('#userPwd').blur(function (){
+  $('#userPwd').change(function (){
     if(flag1){
       var password=$('#userPwd').val();
       var reg = /^[a-z0-9]+$/; //验证格式，只能为字母、数字
       if(isEmpty(password)){
         $('#passspan').html("密码不能为空!");
+          msgbox='密码不能为空!';
         return ;
       }else if(password.length<6||password.length>12){
         $('#passspan').html("格式错误，长度为6-12位!");
+          msgbox='格式错误，长度为6-12位!';
         return ;
       }else if(!(reg.test(password))){
         $('#passspan').html("格式错误，密码为字母或数字!");
+          msgbox='格式错误，密码为字母或数字!';
         return ;
       }else{
         flag2 = 1;
@@ -102,12 +109,13 @@
     }
   });
   //3.
-  $('#userPwd2').blur(function (){
+  $('#userPwd2').change(function (){
     if(flag2){
       var password=$('#userPwd').val();
       var againpw=$('#userPwd2').val();
       if(password!=againpw){//比较密码是否一致
-        $('#againspan').html("密码不一致");
+        $('#againspan').html("密码不一致！");
+          msgbox='密码不一致！';
         return ;
       }else{
         flag3 = 1;
@@ -117,15 +125,17 @@
     }
   });
   //4.
-  $('#userEmail').blur(function (){
+  $('#userEmail').change(function (){
     if(flag3){
       var email=$('#userEmail').val();
       var reg = /^([A-Za-z0-9_\-\.\u4e00-\u9fa5])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,8})$/;//邮箱的格式
       if(isEmpty(email)){
         $('#emailspan').html("邮箱不能为空!");
+          msgbox='邮箱不能为空!';
         return ;
       }else if(!(reg.test(email))){//验证格式
         $('#emailspan').html("格式错误，请输入正确的邮箱!");
+          msgbox='格式错误，请输入正确的邮箱!';
         return ;
       }else{
         flag4 = 1;
@@ -134,11 +144,12 @@
     }
   });
   //5.
-  $('#userAddress').blur(function (){
+  $('#userAddress').change(function (){
     if(flag4){
       var address=$('#userAddress').val();
       if(address.length>50){
         $('#addressspan').html("最多输入50个字符！");
+          msgbox='最多输入50个字符！';
         flag5=0
         return ;
       }else{
@@ -150,8 +161,12 @@
   });
 
   $('#sign').click(function (){
-    if(flag5)
-    $('#signForm').submit();
+    if(flag4&flag5){
+        $('#signForm').submit();
+    }else{
+     alert(msgbox);
+    }
+
   });
   function isEmpty(str){
     if (str==null||str.trim()=="")
